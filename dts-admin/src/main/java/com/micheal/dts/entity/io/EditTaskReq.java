@@ -4,7 +4,7 @@ public class EditTaskReq {
     private String name;
     private String schedName;
 
-    private String desc;
+    private String description;
     private String simpleClass;
     private String canonicalClass;
     private boolean concurrentable;
@@ -25,12 +25,12 @@ public class EditTaskReq {
         this.schedName = schedName;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getSimpleClass() {

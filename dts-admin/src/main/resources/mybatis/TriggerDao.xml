@@ -3,16 +3,16 @@
 <mapper namespace="com.micheal.dts.component.dao.TriggerDao">
     <update id="add" parameterType="Trigger">
         INSERT INTO
-        dts_trigger(sched_name,name,desc,next_fire_time,prev_fire_time,priority,state,start_time,end_time,calendar_name)
+        dts_trigger(sched_name,name,description,next_fire_time,prev_fire_time,priority,state,start_time,end_time,calendar_name)
         VALUE
-        (#{schedName,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{desc,jdbcType=VARCHAR},
+        (#{schedName,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},
         #{next_fire_time,jdbcType=NUMERIC},#{prev_fire_time,jdbcType=NUMERIC},#{priority,jdbcType=INTEGER},#{state,jdbcType=VARCHAR},
         #{startTime,jdbcType=NUMERIC},#{endTime,jdbcType=NUMERIC},#{calendarName,jdbcType=VARCHAR})
     </update>
     <update id="edit" parameterType="Trigger">
         UPDATE dts_trigger
         SET
-        desc = #{desc,jdbcType=VARCHAR},
+        description = #{description,jdbcType=VARCHAR},
         simple_class = #{simpleClass,jdbcType=VARCHAR},
         canonical_class = #{canonicalClass,jdbcType=VARCHAR},
         concurrentable = #{concurrentable,jdbcType=BOOLEAN}

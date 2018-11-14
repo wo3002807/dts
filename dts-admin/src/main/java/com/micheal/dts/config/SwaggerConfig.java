@@ -17,7 +17,7 @@ public class SwaggerConfig {
 	public Docket createRestApi() {
 		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.michael"))
+				.apis(RequestHandlerSelectors.basePackage("com.micheal.dts"))
 				.paths(PathSelectors.any()).build();
 	}
 

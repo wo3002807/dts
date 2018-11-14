@@ -2,6 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.micheal.dts.component.dao.ExecTaskDao">
     <select id="queryTaskByTaskName" resultType="ExecTask" parameterType="Key">
-
+        select * from dts_exec_task where sched_name = #{schedName,jdbcType=VARCHAR} and task_name = #{name,jdbcType=VARCHAR}
     </select>
 </mapper>

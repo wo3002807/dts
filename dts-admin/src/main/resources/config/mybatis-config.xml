@@ -21,9 +21,9 @@
 		<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
 	</settings>
 	<typeAliases>
-		<package name="com.michael.emsp.entity" />
+		<package name="com.micheal.dts.entity" />
 	</typeAliases>
 	<plugins>
-		<plugin interceptor="com.michael.emsp.config.SqlInterceptor" />
+		<plugin interceptor="com.micheal.dts.config.SqlInterceptor" />
 	</plugins>
 </configuration>

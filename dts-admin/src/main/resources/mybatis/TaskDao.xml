@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.micheal.dts.component.dao.TaskDao">
     <update id="add" parameterType="Task">
-        INSERT INTO dts_task(sched_name,name,desc,simple_class,canonical_class,concurrentable)
+        INSERT INTO dts_task(sched_name,name,description,simple_class,canonical_class,concurrentable)
         VALUE
-        (#{schedName,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},,#{desc,jdbcType=VARCHAR},#{simpleClass,jdbcType=VARCHAR},
+        (#{schedName,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{simpleClass,jdbcType=VARCHAR},
         #{canonicalClass,jdbcType=VARCHAR},#{concurrentable,jdbcType=BOOLEAN})
     </update>
     <update id="edit" parameterType="Task">
         UPDATE dts_task
         SET
-        desc = #{desc,jdbcType=VARCHAR},
+        description = #{description,jdbcType=VARCHAR},
         simple_class = #{simpleClass,jdbcType=VARCHAR},
         canonical_class = #{canonicalClass,jdbcType=VARCHAR},
         concurrentable = #{concurrentable,jdbcType=BOOLEAN}
