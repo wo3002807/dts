@@ -1,6 +1,8 @@
 package com.micheal.dts.config;
 
-import com.micheal.dts.entity.io.base.ResultCode;
+import com.micheal.dts.exception.BusinessException;
+import com.micheal.dts.io.RespCode;
+import com.micheal.dts.util.ExpCodeProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,8 +19,13 @@ public class ControllerExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler(Throwable.class)
-    public ResultCode process(HandlerMethod handler, Exception ex) {
-        log.error("异常-{}", ex);
-        return new ResultCode();
+    public RespCode process(HandlerMethod handler, Exception ex) {
+        if(ex instanceof BusinessException){//业务异常无需打印
+            log.info("业务异常->{}",ex);
+            return ExpCodeProperties.getRespCode(((BusinessException) ex).getExpCode());
+        }else{//说明未捕获的异常-属于系统异常
+            log.error("系统异常->{}",ex);
+            return ExpCodeProperties.getRespCode("999999");
+        }
     }
 }

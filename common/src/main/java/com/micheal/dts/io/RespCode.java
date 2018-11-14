@@ -1,11 +1,19 @@
-package com.micheal.dts.entity.io.base;
+package com.micheal.dts.io;
+
+
+import com.alibaba.fastjson.JSONObject;
 
 /**
- * Created by michael on 2018/11/11.
+ * 基础返回码
  */
-public class ResultCode {
+public class RespCode {
     private String retCode;
     private String retMsg;
+
+    public RespCode() {
+        retCode = "000000";
+        retMsg = "处理成功";
+    }
 
     public String getRetCode() {
         return retCode;
@@ -22,4 +30,10 @@ public class ResultCode {
     public void setRetMsg(String retMsg) {
         this.retMsg = retMsg;
     }
+
+    @Override
+    public String toString() {
+        return JSONObject.toJSONString(this);
+    }
+
 }

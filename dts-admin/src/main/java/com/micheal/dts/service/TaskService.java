@@ -7,6 +7,7 @@ import com.micheal.dts.entity.Task;
 import com.micheal.dts.entity.Trigger;
 import com.micheal.dts.entity.io.AddTaskReq;
 import com.micheal.dts.entity.io.EditTaskReq;
+import com.micheal.dts.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,7 @@ public class TaskService {
         key.setName(req.getName());
         key.setSchedName(req.getSchedName());
         Task exitTask = taskDao.queryTask(key);
-        if (exitTask != null) {
-            throw new RuntimeException("新添加的任务已存在");
-        }
+        Assert.isNull(exitTask,"200001");
 
         Task task = new Task();
         task.setName(req.getName());
@@ -51,9 +50,7 @@ public class TaskService {
         key.setName(req.getName());
         key.setSchedName(req.getSchedName());
         Task exitTask = taskDao.queryTask(key);
-        if (exitTask == null) {
-            throw new RuntimeException("新添加的任务不存在");
-        }
+        Assert.notNull(exitTask,"200001");
 
         Task task = new Task();
         task.setName(req.getName());
@@ -71,9 +68,7 @@ public class TaskService {
     public void delTask(Key taskKey) {
         // 查询任务是否跟调度绑定
         List<Trigger> triggerList = triggerDao.queryTriggerByTaskKey(taskKey);
-        if (triggerList != null || triggerList.isEmpty()) {// 如果绑定了，则不给删除
-            throw new RuntimeException("已经跟调度去绑定，请先删除调度");
-        }
+        Assert.isTrue(triggerList != null || triggerList.isEmpty(),"600001");
         taskDao.del(taskKey);
     }
 
