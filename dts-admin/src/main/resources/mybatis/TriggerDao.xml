@@ -33,4 +33,11 @@
         sched_name = #{schedName,jdbcType=VARCHAR}
         AND name = #{name,jdbcType=VARCHAR}
     </update>
+    <select id="queryTriggerByTaskKey" parameterType="Key" resultType="Trigger">
+        SELECT * FROM
+        dts_task
+        WHERE
+        sched_name = #{schedName,jdbcType=VARCHAR}
+        AND name = #{name,jdbcType=VARCHAR}
+    </select>
 </mapper>

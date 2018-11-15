@@ -21,13 +21,13 @@ public class Assert {
     }
     public static void notNull(Object obj, String retCode) {
         if (obj == null) {
-            throw new RuntimeException(retCode);
+            throw new BusinessException(retCode);
         }
     }
 
     public static void isEqual(int expect, int actual, String retCode) {
         if (expect != actual) {
-            throw new RuntimeException(retCode);
+            throw new BusinessException(retCode);
         }
     }
 }

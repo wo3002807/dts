@@ -4,4 +4,9 @@
     <select id="queryTaskByTaskName" resultType="ExecTask" parameterType="Key">
         select * from dts_exec_task where sched_name = #{schedName,jdbcType=VARCHAR} and task_name = #{name,jdbcType=VARCHAR}
     </select>
+    <update id="saveExecTask" parameterType="ExecTask">
+        INSERT INTO dts_exec_task(entry_id,sched_name,task_name,state,create_time)
+        VALUE
+        (#{entryId,jdbcType=VARCHAR},#{schedName,jdbcType=VARCHAR},#{taskName,jdbcType=VARCHAR},#{state,jdbcType=VARCHAR},#{createTime,jdbcType=NUMERIC})
+    </update>
 </mapper>

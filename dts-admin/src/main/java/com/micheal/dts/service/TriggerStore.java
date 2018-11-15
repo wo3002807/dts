@@ -6,5 +6,7 @@ public class TriggerStore {
     /**
      * 添加调度
      */
-    public void add(){}
+    public void add(){
+
+    }
 }

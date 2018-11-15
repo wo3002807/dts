@@ -4,7 +4,7 @@
     <update id="add" parameterType="Task">
         INSERT INTO dts_task(sched_name,name,description,simple_class,canonical_class,concurrentable)
         VALUE
-        (#{schedName,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{simpleClass,jdbcType=VARCHAR},
+        (#{key.schedName,jdbcType=VARCHAR},#{key.name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{simpleClass,jdbcType=VARCHAR},
         #{canonicalClass,jdbcType=VARCHAR},#{concurrentable,jdbcType=BOOLEAN})
     </update>
     <update id="edit" parameterType="Task">
@@ -15,8 +15,8 @@
         canonical_class = #{canonicalClass,jdbcType=VARCHAR},
         concurrentable = #{concurrentable,jdbcType=BOOLEAN}
         WHERE
-        sched_name = #{schedName,jdbcType=VARCHAR}
-        AND name = #{name,jdbcType=VARCHAR}
+        sched_name = #{key.schedName,jdbcType=VARCHAR}
+        AND name = #{key.name,jdbcType=VARCHAR}
     </update>
     <select id="queryTask" parameterType="Key" resultType="Task">
         SELECT * FROM

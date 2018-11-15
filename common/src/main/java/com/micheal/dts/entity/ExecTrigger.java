@@ -1,13 +1,13 @@
 package com.micheal.dts.entity;
 
 
-public class ExecTask {
+public class ExecTrigger {
     private String entryId;
     private String schedName;
+    private String triggerName;
     private String taskName;
     private String nodeId;
     private String state;
-    private Long createTime;
     private Long startTime;
     private Long endTime;
 
@@ -25,6 +25,14 @@ public class ExecTask {
 
     public void setSchedName(String schedName) {
         this.schedName = schedName;
+    }
+
+    public String getTriggerName() {
+        return triggerName;
+    }
+
+    public void setTriggerName(String triggerName) {
+        this.triggerName = triggerName;
     }
 
     public String getTaskName() {
@@ -65,13 +73,5 @@ public class ExecTask {
 
     public void setEndTime(Long endTime) {
         this.endTime = endTime;
-    }
-
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
     }
 }

@@ -3,13 +3,22 @@ package com.micheal.dts.entity;
 /**
  * Created by michael on 2018/11/5.
  */
-public class Task extends Key{
+public class Task {
+    private Key key;
     private String description;
     private String simpleClass;
     private String canonicalClass;
     private Boolean concurrentable;
     private Boolean isDirty;
     private String staticData;
+
+    public Key getKey() {
+        return key;
+    }
+
+    public void setKey(Key key) {
+        this.key = key;
+    }
 
     public String getDescription() {
         return description;

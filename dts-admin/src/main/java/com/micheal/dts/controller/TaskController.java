@@ -41,7 +41,7 @@ public class TaskController {
     @ApiOperation(value = "执行任务")
     @RequestMapping(value = "/exec", method = RequestMethod.POST)
     public RespCode exec(@RequestBody Key req) {
-        taskService.delTask(req);
+        taskService.execTask(req);
         return new RespCode();
     }
 }

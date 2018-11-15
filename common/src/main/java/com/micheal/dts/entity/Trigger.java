@@ -3,7 +3,8 @@ package com.micheal.dts.entity;
 /**
  * Created by michael on 2018/11/5.
  */
-public class Trigger extends Key {
+public class Trigger  {
+    private Key key;
     private String description;
     private String taskName;
     private Long nextFireTime;
@@ -14,6 +15,14 @@ public class Trigger extends Key {
     private Long startTime;
     private Long endTime;
     private Short misfireInstr;
+
+    public Key getKey() {
+        return key;
+    }
+
+    public void setKey(Key key) {
+        this.key = key;
+    }
 
     public String getDescription() {
         return description;

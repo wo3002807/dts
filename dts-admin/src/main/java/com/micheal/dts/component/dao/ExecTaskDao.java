@@ -9,4 +9,8 @@ public interface ExecTaskDao {
      * 根据任务key来查找正在执行的任务
      */
     ExecTask queryTaskByTaskName(Key taskKey);
+    /**
+     * 保存待执行任务
+     */
+    int saveExecTask(ExecTask execTask);
 }
