@@ -3,7 +3,7 @@ package com.micheal.dts.entity;
 /**
  * Created by michael on 2018/11/5.
  */
-public class Trigger  {
+public class Trigger {
     private Key key;
     private String description;
     private String taskName;
@@ -12,9 +12,12 @@ public class Trigger  {
     private Integer priority;
     private String state;
     private String type;
+    private String calendarName;
     private Long startTime;
     private Long endTime;
     private Short misfireInstr;
+    private Long updateTime;
+    private String updateOper;
 
     public Key getKey() {
         return key;
@@ -102,5 +105,29 @@ public class Trigger  {
 
     public void setMisfireInstr(Short misfireInstr) {
         this.misfireInstr = misfireInstr;
+    }
+
+    public Long getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Long updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getUpdateOper() {
+        return updateOper;
+    }
+
+    public void setUpdateOper(String updateOper) {
+        this.updateOper = updateOper;
+    }
+
+    public String getCalendarName() {
+        return calendarName;
+    }
+
+    public void setCalendarName(String calendarName) {
+        this.calendarName = calendarName;
     }
 }

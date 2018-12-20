@@ -5,6 +5,16 @@ package com.micheal.dts.constant;
  */
 public class StateConstant {
     /**
+     * 初始化
+     */
+    public static String INITIAL = "INITIAL";
+
+    /**
+     * 准备
+     */
+    public static String PREPARED = "PREPARED";
+
+    /**
      * 等待
      */
     public static String WAITING = "WAITING";
@@ -32,7 +42,7 @@ public class StateConstant {
     /**
      * 错误
      */
-    public static  String ERROR = "ERROR";
+    public static String ERROR = "ERROR";
 
     /**
      * 暂停
@@ -42,7 +52,7 @@ public class StateConstant {
     /**
      * 暂停阻塞
      */
-    public static  String PAUSED_BLOCKED = "PAUSED_BLOCKED";
+    public static String PAUSED_BLOCKED = "PAUSED_BLOCKED";
 
     /**
      * 删除
@@ -52,5 +62,5 @@ public class StateConstant {
     /**
      * 失败
      */
-    public static  String MISFIRED = "MISFIRED";
+    public static String MISFIRED = "MISFIRED";
 }

@@ -94,4 +94,9 @@ public class TaskService {
         int result = execTaskDao.saveExecTask(execTask);
         Assert.isTrue(result == 1,"600002");
     }
+
+    public Task queryTask(Key key){
+        Task task = taskDao.queryTask(key);
+        return task;
+    }
 }

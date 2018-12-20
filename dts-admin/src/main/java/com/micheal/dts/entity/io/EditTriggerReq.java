@@ -1,12 +1,11 @@
 package com.micheal.dts.entity.io;
 
-public class AddTriggerReq {
+public class EditTriggerReq {
     private String schedName;
     private String name;
     private String description;
     private String taskName;
     private Integer priority;
-    private String type;
     private String calendarName;
     private Long repeatCount;
     private Long repeatInterval;
@@ -50,14 +49,6 @@ public class AddTriggerReq {
 
     public void setPriority(Integer priority) {
         this.priority = priority;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getCalendarName() {

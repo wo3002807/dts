@@ -1,28 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.micheal.dts.component.dao.TriggerDao">
+    <resultMap id="triggerMap" type="Trigger" autoMapping="true">
+        <association property="key" javaType="Key" autoMapping="true"/>
+    </resultMap>
     <update id="add" parameterType="Trigger">
         INSERT INTO
-        dts_trigger(sched_name,name,description,next_fire_time,prev_fire_time,priority,state,start_time,end_time,calendar_name)
+        dts_trigger(sched_name,name,description,task_name,type,priority,state,calendar_name,update_time,update_oper)
         VALUE
-        (#{schedName,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},
-        #{next_fire_time,jdbcType=NUMERIC},#{prev_fire_time,jdbcType=NUMERIC},#{priority,jdbcType=INTEGER},#{state,jdbcType=VARCHAR},
-        #{startTime,jdbcType=NUMERIC},#{endTime,jdbcType=NUMERIC},#{calendarName,jdbcType=VARCHAR})
+        (#{key.schedName,jdbcType=VARCHAR},#{key.name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{taskName,jdbcType=VARCHAR},
+        #{type,jdbcType=VARCHAR},#{priority,jdbcType=INTEGER},#{state,jdbcType=VARCHAR},
+        #{calendarName,jdbcType=VARCHAR},#{updateTime,jdbcType=NUMERIC},#{updateOper,jdbcType=VARCHAR})
+    </update>
+    <update id="addCron" parameterType="Crontrigger">
+        INSERT INTO
+        dts_cron_trigger(sched_name,name,cron_expression)
+        VALUE
+        (#{key.schedName,jdbcType=VARCHAR},#{key.name,jdbcType=VARCHAR},#{cronExpression,jdbcType=VARCHAR})
+    </update>
+    <update id="addSimple" parameterType="SimpleTrigger">
+        INSERT INTO
+        dts_simple_trigger(sched_name,name,repeat_count,repeat_interval)
+        VALUE
+        (#{key.schedName,jdbcType=VARCHAR},#{key.name,jdbcType=VARCHAR},#{repeatCount,jdbcType=NUMERIC},#{repeatInterval,jdbcType=NUMERIC})
     </update>
     <update id="edit" parameterType="Trigger">
         UPDATE dts_trigger
-        SET
-        description = #{description,jdbcType=VARCHAR},
-        simple_class = #{simpleClass,jdbcType=VARCHAR},
-        canonical_class = #{canonicalClass,jdbcType=VARCHAR},
-        concurrentable = #{concurrentable,jdbcType=BOOLEAN}
+        <set>
+            <if test="description != null and description != ''">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="taskName != null and taskName != ''">
+                task_name = #{taskName,jdbcType=VARCHAR},
+            </if>
+            <if test="priority != null ">
+                priority = #{priority,jdbcType=INTEGER},
+            </if>
+            <if test="calendarName != null and calendarName != ''">
+                calendar_name = #{calendarName,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=NUMERIC},
+            </if>
+            <if test="updateOper != null">
+                update_oper = #{updateOper,jdbcType=VARCHAR}
+            </if>
+        </set>
         WHERE
-        sched_name = #{schedName,jdbcType=VARCHAR}
-        AND name = #{name,jdbcType=VARCHAR}
+        sched_name = #{key.schedName,jdbcType=VARCHAR}
+        AND name = #{key.name,jdbcType=VARCHAR}
+        AND state = #{state,jdbcType=VARCHAR}
     </update>
-    <select id="queryTrigger" parameterType="Key" resultType="Trigger">
+    <update id="editCron" parameterType="Crontrigger">
+        UPDATE dts_cron_trigger
+        SET
+        cron_expression = #{cronExpression,jdbcType=VARCHAR}
+        WHERE
+        sched_name = #{key.schedName,jdbcType=VARCHAR}
+        AND name = #{key.name,jdbcType=VARCHAR}
+    </update>
+    <update id="editSimple" parameterType="SimpleTrigger">
+        UPDATE dts_trigger
+        <set>
+            <if test="repeatCount != null">
+                repeat_count = #{repeatCount,jdbcType=VARCHAR},
+            </if>
+            <if test="repeatInterval != null and taskName != ''">
+                repeat_interval = #{repeatInterval,jdbcType=VARCHAR}
+            </if>
+        </set>
+        WHERE
+        sched_name = #{key.schedName,jdbcType=VARCHAR}
+        AND name = #{key.name,jdbcType=VARCHAR}
+    </update>
+    <select id="queryTrigger" parameterType="Key" resultMap="triggerMap">
         SELECT * FROM
-        dts_task
+        dts_trigger
         WHERE
         sched_name = #{schedName,jdbcType=VARCHAR}
         AND name = #{name,jdbcType=VARCHAR}
@@ -33,11 +86,21 @@
         sched_name = #{schedName,jdbcType=VARCHAR}
         AND name = #{name,jdbcType=VARCHAR}
     </update>
-    <select id="queryTriggerByTaskKey" parameterType="Key" resultType="Trigger">
+    <select id="queryTriggerByTaskKey" parameterType="Key" resultMap="triggerMap">
         SELECT * FROM
-        dts_task
+        dts_trigger
         WHERE
         sched_name = #{schedName,jdbcType=VARCHAR}
         AND name = #{name,jdbcType=VARCHAR}
     </select>
+    <update id="updateState">
+        UPDATE dts_trigger
+        SET
+        state = #{newState,jdbcType=VARCHAR}
+        WHERE
+        sched_name = #{key.schedName,jdbcType=VARCHAR}
+        AND name = #{key.name,jdbcType=VARCHAR}
+        AND state = #{oldState,jdbcType=VARCHAR}
+    </update>
+
 </mapper>

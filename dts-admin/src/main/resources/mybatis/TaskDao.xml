@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.micheal.dts.component.dao.TaskDao">
+    <resultMap id="taskMap" type="Task" autoMapping="true">
+        <association property="key" javaType="Key" autoMapping="true"/>
+    </resultMap>
     <update id="add" parameterType="Task">
         INSERT INTO dts_task(sched_name,name,description,simple_class,canonical_class,concurrentable)
         VALUE
@@ -18,7 +21,7 @@
         sched_name = #{key.schedName,jdbcType=VARCHAR}
         AND name = #{key.name,jdbcType=VARCHAR}
     </update>
-    <select id="queryTask" parameterType="Key" resultType="Task">
+    <select id="queryTask" parameterType="Key" resultMap="taskMap">
         SELECT * FROM
         dts_task
         WHERE
