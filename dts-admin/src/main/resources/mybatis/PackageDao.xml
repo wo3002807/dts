@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.micheal.dts.component.dao.PackageDao">
+    <select id="classNameQuery" resultType="String">
+        SELECT simple_class FROM dts_package
+        <if test="schedName != null and schedName != ''">
+            where sched_name = #{schedName,jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>

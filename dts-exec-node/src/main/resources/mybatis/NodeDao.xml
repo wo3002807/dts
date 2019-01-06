@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.micheal.dts.component.dao.ExecNodeDao">
+    <select id="check" resultType="Node">
+        SELECT node_id, host, ip, port, sched_name, check_time
+        FROM dts_exec_node
+        WHERE 1=1
+        AND ip = #{ip,jdbcType=VARCHAR}
+        AND port = #{port,jdbcType=VARCHAR}
+        AND sched_name = #{schedName,jdbcType=VARCHAR}
+    </select>
+    <insert id="register" parameterType="Node">
+        INSERT INTO dts_exec_node(node_id,host,ip,port,sched_name,check_time)
+        VALUES
+        (#{nodeId,jdbcType=VARCHAR},#{host,jdbcType=VARCHAR},#{ip,jdbcType=VARCHAR},#{port,jdbcType=VARCHAR},#{schedName,jdbcType=VARCHAR},#{checkTime,jdbcType=NUMERIC});
+    </insert>
+    <update id="update" parameterType="Node">
+        UPDATE dts_exec_node
+        SET check_time = #{checkTime,jdbcType=NUMERIC}
+        WHERE
+        ip = #{ip,jdbcType=VARCHAR}
+        AND port = #{port,jdbcType=VARCHAR}
+        AND sched_name = #{schedName,jdbcType=VARCHAR}
+    </update>
+</mapper>

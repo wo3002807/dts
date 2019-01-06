@@ -63,4 +63,7 @@ public class StateConstant {
      * 失败
      */
     public static String MISFIRED = "MISFIRED";
+    /**
+     * 调度
+     */
 }

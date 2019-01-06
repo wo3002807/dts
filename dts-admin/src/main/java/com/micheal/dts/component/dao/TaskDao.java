@@ -4,6 +4,8 @@ package com.micheal.dts.component.dao;
 import com.micheal.dts.entity.Key;
 import com.micheal.dts.entity.Task;
 
+import java.util.List;
+
 public interface TaskDao {
     /**
      * 添加任务
@@ -25,4 +27,8 @@ public interface TaskDao {
      */
     int del(Key key);
 
+    /**
+     * 任务列表查询
+     */
+    List<Task> listQuery(Task task);
 }

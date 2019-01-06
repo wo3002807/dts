@@ -10,6 +10,7 @@ import com.micheal.dts.entity.Task;
 import com.micheal.dts.entity.Trigger;
 import com.micheal.dts.entity.io.AddTaskReq;
 import com.micheal.dts.entity.io.EditTaskReq;
+import com.micheal.dts.entity.io.TaskListQueryReq;
 import com.micheal.dts.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class TaskService {
         key.setName(req.getName());
         key.setSchedName(req.getSchedName());
         Task exitTask = taskDao.queryTask(key);
-        Assert.isNull(exitTask,"200001");
+        Assert.isNull(exitTask, "200001");
 
         Task task = new Task();
         task.setKey(key);
@@ -55,7 +56,7 @@ public class TaskService {
         key.setName(req.getName());
         key.setSchedName(req.getSchedName());
         Task exitTask = taskDao.queryTask(key);
-        Assert.notNull(exitTask,"100001");
+        Assert.notNull(exitTask, "100001");
 
         Task task = new Task();
         task.setKey(key);
@@ -72,7 +73,7 @@ public class TaskService {
     public void delTask(Key taskKey) {
         // 查询任务是否跟调度绑定
         List<Trigger> triggerList = triggerDao.queryTriggerByTaskKey(taskKey);
-        Assert.isTrue(triggerList != null || triggerList.isEmpty(),"600001");
+        Assert.isTrue(triggerList != null || triggerList.isEmpty(), "600001");
         taskDao.del(taskKey);
     }
 
@@ -82,7 +83,7 @@ public class TaskService {
     public void execTask(Key taskKey) {
         // 查询当前正在执行任务中是否有该任务，如果有该任务，则不能执行
         Task task = taskDao.queryTask(taskKey);
-        Assert.notNull(task,"100001");
+        Assert.notNull(task, "100001");
 
         // 往任务执行表插入一条记录，待执行去执行
         ExecTask execTask = new ExecTask();
@@ -92,11 +93,22 @@ public class TaskService {
         execTask.setCreateTime(System.currentTimeMillis());
         execTask.setState(StateConstant.WAITING);
         int result = execTaskDao.saveExecTask(execTask);
-        Assert.isTrue(result == 1,"600002");
+        Assert.isTrue(result == 1, "600002");
     }
 
-    public Task queryTask(Key key){
+    public Task queryTask(Key key) {
         Task task = taskDao.queryTask(key);
         return task;
+    }
+
+    public List<Task> listQuery(TaskListQueryReq req) {
+        Task task = new Task();
+        Key key = new Key();
+        key.setName(req.getName());
+        key.setSchedName(req.getSchedName());
+        task.setKey(key);
+        task.setSimpleClass(req.getSimpleClass());
+        List<Task> data = taskDao.listQuery(task);
+        return data;
     }
 }

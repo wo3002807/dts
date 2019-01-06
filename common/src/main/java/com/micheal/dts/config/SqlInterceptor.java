@@ -182,7 +182,6 @@ public class SqlInterceptor implements Interceptor {
 				propertyValue = parameterObject.toString();
 			} else {
 				String propertyName = parameterMapping.getProperty();
-
 				Field field = parameterObjectClass
 						.getDeclaredField(propertyName);
 				// 要获取Field中的属性值，这里必须将私有属性的accessible设置为true

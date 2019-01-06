@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.micheal.dts.component.dao.NodeDao">
+    <select id="view" resultType="Node" parameterType="Node">
+        SELECT node_id, host, ip, port, sched_name, state
+        FROM dts.dts_exec_node
+        WHERE 1=1
+        <if test="schedName != null and schedName != ''">
+            AND sched_name = #{schedName,jdbcType=VARCHAR}
+        </if>
+        <if test="checkTime != null and state != ''">
+            AND check_time &lt;= #{checkTime,jdbcType=NUMERIC}
+        </if>
+    </select>
+</mapper>

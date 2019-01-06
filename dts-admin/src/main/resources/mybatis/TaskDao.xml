@@ -34,4 +34,20 @@
         sched_name = #{schedName,jdbcType=VARCHAR}
         AND name = #{name,jdbcType=VARCHAR}
     </update>
+    <select id="listQuery" parameterType="Task" resultMap="taskMap">
+        SELECT
+        sched_name,name,description,simple_class,canonical_class,
+        concurrentable,is_dirty,static_data,update_time,update_oper
+        FROM dts_task
+        where 1=1
+        <if test="key.schedName != null and key.schedName != ''">
+            and sched_name = #{key.schedName,jdbcType=VARCHAR}
+        </if>
+        <if test="key.name != null and key.name != ''">
+            and name like '${key.name}%'
+        </if>
+        <if test="simpleClass != null and simpleClass != ''">
+            and simple_class = #{simpleClass,jdbcType=VARCHAR}
+        </if>
+    </select>
 </mapper>
